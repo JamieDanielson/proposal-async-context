@@ -20,6 +20,8 @@ parameters to the function or some nested function, or as a closed over
 variable), or implicitly (extracted from the call stack, e.g., outside the scope
 as a external object that the function or nested function has access to).
 
+Refer to [jamie/examples/sync](./jamie/examples/sync.mjs)
+
 ```javascript
 function program() {
   const value = { key: 123 };
@@ -69,6 +71,8 @@ barrier is the `await` keyword. As a result, code that "just works" in
 synchronous JS has unexpected behavior in asynchronous JS while appearing almost
 exactly the same.
 
+Refer to [jamie/examples/async](./jamie/examples/async.mjs)
+
 ```javascript
 function program() {
   const value = { key: 123 };
@@ -108,6 +112,8 @@ user land code alone. For instance, if the call stack has already been replaced
 by the time the function is called, that function will never have a chance to
 capture the shared reference.
 
+Refer to [jamie/examples/setTimeout](./jamie/examples/setTimeout.mjs)
+
 ```javascript
 function program() {
   const value = { key: 123 };
@@ -117,7 +123,7 @@ function program() {
   // the try-finally code.
   try {
     shared = value;
-    setTimeout(implicit, 0);
+    setTimeout(implicit(), 0);
   } finally {
     shared = undefined;
   }
@@ -193,6 +199,8 @@ can be snapshot and restored with `Snapshot`.
 `Variable.prototype.run()` and `Variable.prototype.get()` sets and gets
 the current value of an async execution flow.
 
+Refer to [jamie/examples/AsyncContext.Variable](./jamie/examples/AsyncContext.Variable.mjs)
+
 ```typescript
 const asyncVar = new AsyncContext.Variable();
 
@@ -249,6 +257,8 @@ current values (a snapshot and restore).
 
 Note that even with `Snapshot`, you can only access the value associated with
 a `Variable` instance if you have access to that instance.
+
+Refer to [jamie/examples/AsyncContext.Snapshot](./jamie/examples/AsyncContext.Snapshot.mjs)
 
 ```typescript
 const asyncVar = new AsyncContext.Variable();
